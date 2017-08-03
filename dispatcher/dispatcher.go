@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"time"
-
 	"github.com/go-redis/redis"
 	"github.com/nats-io/go-nats"
 )
@@ -41,22 +39,8 @@ func StartDispatcher() {
 			hash := md5.Sum(work.Message)
 			key := fmt.Sprintf("%v-%v", work.Topic, hash)
 
-			_, err := rc.Get(key).Result()
-			if err == redis.Nil {
+			if !is_duped_message(key, rc) {
 				nc.Publish(work.Topic, work.Message)
-
-				_, err := rc.Set(key, 1, 600*time.Second).Result()
-				if err != nil {
-					fmt.Printf("Something wrong seting redis key: %v", err)
-				}
-			} else if err != nil {
-				fmt.Printf("Error while getting from Redis: %v", err)
-			} else {
-				// If we saw the value again reset the expiry
-				_, err := rc.Set(key, 1, 600*time.Second).Result()
-				if err != nil {
-					fmt.Printf("Something wrong seting redis key: %v", err)
-				}
 			}
 		}
 	}
