@@ -1,25 +1,25 @@
 package handlers
 
 import (
-"github.com/gin-gonic/gin"
-"github.com/regner/albiondata-backend/dispatcher"
+	"encoding/json"
+	"github.com/gin-gonic/gin"
+	"github.com/regner/albiondata-backend/dispatcher"
 )
 
 type ingestMarketOrders struct {
-	Orders []string `json:"orders"`
+	Orders []ingestMarketOrder `json:"orders"`
 }
 
 type ingestMarketOrder struct {
-	ID string `jston:"Id"`
-	order_id=order_json['Id'],
-item_id=item_id,
-location_id=args['LocationId'],
-quality=order_json['QualityLevel'],
-enchantment=order_json['EnchantmentLevel'],
-price=price,
-amount=order_json['Amount'],
-expire=dateutil.parser.parse(order_json['Expires']),
-is_buy_order=is_buy_order,
+	ID               string `json:"Id"`
+	ItemID           string `json:"ItemTypeId"`
+	LocationID       int    `json:"LocationId"`
+	QualityLevel     int    `json:"QualityLevel"`
+	EnchantmentLevel int    `json:"EnchantmentLevel"`
+	Price            int    `json:"UnitPriceSilver"`
+	Amount           int    `json:"Amount"`
+	AuctionType      string `json:"AuctionType"`
+	Expires          string `json:"Expires"`
 }
 
 func IngestMarketOrders(c *gin.Context) {
@@ -29,7 +29,7 @@ func IngestMarketOrders(c *gin.Context) {
 	for _, v := range incomingRequest.Orders {
 		work := dispatcher.Work{
 			Topic:   "market-order",
-			Message: []byte(v),
+			Message: []byte(json.Marshal(v)),
 		}
 
 		dispatcher.WorkQueue <- work
