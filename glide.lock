@@ -1,0 +1,48 @@
+hash: e69e1150e8856224f98e846487f3e108d1783bf3169b3a941cf3d6dd14396088
+updated: 2017-08-03T00:36:47.0725673-07:00
+imports:
+- name: github.com/gin-contrib/sse
+  version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
+- name: github.com/gin-gonic/gin
+  version: d459835d2b077e44f7c9b453505ee29881d5d12d
+  subpackages:
+  - binding
+  - render
+- name: github.com/go-redis/redis
+  version: a8ee44122a3b1763b94fed7d665be56fa0a71080
+  subpackages:
+  - internal
+  - internal/consistenthash
+  - internal/hashtag
+  - internal/pool
+  - internal/proto
+- name: github.com/golang/protobuf
+  version: 2402d76f3d41f928c7902a765dfc872356dd3aad
+  subpackages:
+  - proto
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/mcuadros/go-gin-prometheus
+  version: 94faa356e9e87dbe86338221ba41c270037b4a65
+- name: github.com/nats-io/go-nats
+  version: 61923ed1eaf8398000991fbbee2ef11ab5a5be0d
+- name: github.com/nats-io/nats
+  version: 43abfaad5f01e2185b415f0d9f9af47d846ee540
+  subpackages:
+  - encoders/builtin
+  - util
+- name: github.com/nats-io/nuid
+  version: 3cf34f9fca4e88afa9da8eabd75e3326c9941b44
+- name: github.com/ugorji/go
+  version: ea9cd21fa0bc41ee4bdd50ac7ed8cbc7ea2ed960
+  subpackages:
+  - codec
+- name: golang.org/x/sys
+  version: eb2c74142fd19a79b3f237334c7384d5167b1b46
+  subpackages:
+  - unix
+- name: gopkg.in/go-playground/validator.v8
+  version: c193cecd124b5cc722d7ee5538e945bdb3348435
+- name: gopkg.in/yaml.v2
+  version: bef53efd0c76e49e6de55ead051f886bea7e9420
+testImports: []

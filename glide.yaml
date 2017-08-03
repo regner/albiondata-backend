@@ -1,0 +1,9 @@
+package: github.com/regner/albiondata-backend
+import:
+- package: github.com/gin-gonic/gin
+  version: ^1.2.0
+- package: github.com/nats-io/go-nats
+  version: ^1.2.2
+- package: github.com/mcuadros/go-gin-prometheus
+- package: github.com/go-redis/redis
+  version: ^6.5.5
