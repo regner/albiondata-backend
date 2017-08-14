@@ -3,6 +3,7 @@ package dispatcher
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/go-redis/redis"
@@ -32,7 +33,9 @@ func is_duped_message(key string, rc *redis.Client) bool {
 }
 
 func set(key string, rc *redis.Client) {
-	cache_time := time.Duration(os.Getenv("CACHE_TIME")) * time.Second
+	cacheTime, _ := strconv.Atoi(os.Getenv("CACHE_TIME"))
+
+	cache_time := time.Duration(cacheTime) * time.Second
 
 	_, err := rc.Set(key, 1, cache_time).Result()
 	if err != nil {

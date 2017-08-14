@@ -2,18 +2,19 @@ package handlers
 
 import (
 	"encoding/json"
+
 	"github.com/gin-gonic/gin"
 	"github.com/regner/albiondata-backend/dispatcher"
 )
 
 type ingestMarketOrders struct {
-	Orders []ingestMarketOrder `json:"orders"`
+	Orders     []ingestMarketOrder `json:"Orders"`
+	LocationID int                 `json:"LocationId"`
 }
 
 type ingestMarketOrder struct {
-	ID               string `json:"Id"`
+	ID               int    `json:"Id"`
 	ItemID           string `json:"ItemTypeId"`
-	LocationID       int    `json:"LocationId"`
 	QualityLevel     int    `json:"QualityLevel"`
 	EnchantmentLevel int    `json:"EnchantmentLevel"`
 	Price            int    `json:"UnitPriceSilver"`
@@ -27,9 +28,11 @@ func IngestMarketOrders(c *gin.Context) {
 	c.BindJSON(&incomingRequest)
 
 	for _, v := range incomingRequest.Orders {
+		data, _ := json.Marshal(v)
+
 		work := dispatcher.Work{
 			Topic:   "market-order",
-			Message: []byte(json.Marshal(v)),
+			Message: []byte(data),
 		}
 
 		dispatcher.WorkQueue <- work

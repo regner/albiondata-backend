@@ -11,6 +11,7 @@ func main() {
 
 	r := gin.Default()
 
+	r.POST("/api/v1/ingest/goldprices/", handlers.IngestGoldPrices)
 	r.POST("/api/v1/ingest/marketorders/", handlers.IngestMarketOrders)
 
 	r.Run(":8080")
