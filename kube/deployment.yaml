@@ -32,3 +32,12 @@ spec:
           env:
             - name: NATS_URL
               value: nats://nats:4222
+            - name: GIN_MODE
+              value: release
+            - name: REDIS_ADDR
+              value: ad-redis-redis:6379
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: ad-redis-redis
+                  key: redis-password
